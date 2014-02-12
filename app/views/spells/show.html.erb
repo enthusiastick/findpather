@@ -1,0 +1,7 @@
+<h1>Edit Spell</h1>
+<%= simple_form_for(@spell) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :url %>
+  <%= f.input :level %>
+  <%= f.button :submit, 'Edit' %>
+<% end %>
