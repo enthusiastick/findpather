@@ -1,0 +1,34 @@
+
+<h1>Spells Known (<%= @spells.count %>)</h1>
+<table width=100%>
+  <thead>
+    <tr>
+      <th width=5%>
+        Level
+      </th>
+      <th>
+        Name
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @spells.each do |spell| %>
+      <tr>
+        <td>
+          <%= spell.level %>
+        </td>
+        <td>
+          <%= link_to spell.name, spell.url %> <%= link_to(spell_path(spell)) do %><i class="fi-pencil"></i><% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>Learn New Spell</h2>
+<%= simple_form_for(@spell) do |f| %>
+  <%= f.input :name %>
+  <%= f.input :url %>
+  <%= f.input :level %>
+  <%= f.button :submit, 'Learn' %>
+<% end %>

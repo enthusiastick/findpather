@@ -33,8 +33,8 @@ group :doc do
 end
 
 gem 'simple_form'
-gem 'devise'
 gem 'foundation-rails'
+gem 'foundation-icons-sass-rails'
 
 group :test, :development do
   gem 'rspec-rails'
