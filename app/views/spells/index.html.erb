@@ -1,20 +1,24 @@
 
 <h1>Spells Known (<%= @spells.count %>)</h1>
 
-<% @spells_by_level.keys.each do |key| %>
-  <h3>Level <%= key %> (<%= @spells_by_level[key].length %>)</h3>
-  <table width=100%>
-    <tbody>
-      <% @spells_by_level[key].each do |spell| %>
-        <tr>
-          <td>
+<dl class="tabs" data-tab>
+  <% @spells_by_level.keys.each do |key| %>
+    <dd><%= link_to "Level #{key}", "#level-#{key}" %></dd>
+  <% end %>
+</dl>
+<div class="tabs-content">
+  <% @spells_by_level.keys.each do |key| %>
+    <div class="content" id="level-<%= key %>">
+      <ol>
+        <% @spells_by_level[key].each do |spell| %>
+          <li>
             <%= link_to spell.name, spell.url %> <%= link_to(spell_path(spell)) do %><i class="fi-pencil"></i><% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+  <% end %>
+</div>
 
 <h2>Learn New Spell</h2>
 <%= simple_form_for(@spell) do |f| %>
