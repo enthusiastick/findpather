@@ -13,6 +13,14 @@ class SpellsController < ApplicationController
 
   def index
     @spells = Spell.all.order(:level, :name)
+    @spells_by_level = Hash.new
+    @spells.each do |spell|
+      if @spells_by_level.has_key?(spell.level)
+          @spells_by_level[spell.level] << spell
+      else
+        @spells_by_level[spell.level] = [spell]
+      end
+    end
     @spell = Spell.new
   end
 

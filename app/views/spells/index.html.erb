@@ -1,29 +1,20 @@
 
 <h1>Spells Known (<%= @spells.count %>)</h1>
-<table width=100%>
-  <thead>
-    <tr>
-      <th width=5%>
-        Level
-      </th>
-      <th>
-        Name
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @spells.each do |spell| %>
-      <tr>
-        <td>
-          <%= spell.level %>
-        </td>
-        <td>
-          <%= link_to spell.name, spell.url %> <%= link_to(spell_path(spell)) do %><i class="fi-pencil"></i><% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<% @spells_by_level.keys.each do |key| %>
+  <h3>Level <%= key %> (<%= @spells_by_level[key].length %>)</h3>
+  <table width=100%>
+    <tbody>
+      <% @spells_by_level[key].each do |spell| %>
+        <tr>
+          <td>
+            <%= link_to spell.name, spell.url %> <%= link_to(spell_path(spell)) do %><i class="fi-pencil"></i><% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 <h2>Learn New Spell</h2>
 <%= simple_form_for(@spell) do |f| %>
