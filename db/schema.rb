@@ -25,7 +25,10 @@ ActiveRecord::Schema.define(version: 20140214220756) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "firstname",  null: false
+    t.string   "lastname",   null: false
+    t.string   "email",      null: false
+    t.string   "google_id",  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

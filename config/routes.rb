@@ -4,6 +4,8 @@ Findpather::Application.routes.draw do
     resources :spells
   end
 
-  root 'spells#index'
+  root 'pages#index'
+
+  get '/auth/:provider/callback', to: 'users#create'
 
 end
