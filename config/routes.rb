@@ -1,6 +1,8 @@
 Findpather::Application.routes.draw do
 
-  resources :spells
+  resources :users do
+    resources :spells
+  end
 
   root 'spells#index'
 
