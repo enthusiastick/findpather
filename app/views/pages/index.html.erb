@@ -1,5 +1,11 @@
-<%- unless current_user == nil %>
+  <%- if user_signed_in? -%>
+  <div class="small-12 columns">
+    <h1><%= current_user.firstname %> <%= current_user.lastname %></h1>
+    <h3><%= current_user.email %></h3>
 
-<h1><%= current_user.firstname %></h1>
+  <%- else -%>
+  <div class="small-4 small-centered columns">
+    <h1><%= link_to('/auth/google_oauth2', class: 'button large round expand') do %><i class="fi-torso"></i> Sign In With Google <i class="fi-social-google-plus"></i><% end %></h1>
 
-<%- end -%>
+  <%- end -%>
+</div>
