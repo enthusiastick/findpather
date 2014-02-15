@@ -7,5 +7,6 @@ Findpather::Application.routes.draw do
   root 'pages#index'
 
   get '/auth/:provider/callback', to: 'users#create'
+  get '/logout', to: 'users#log_out'
 
 end

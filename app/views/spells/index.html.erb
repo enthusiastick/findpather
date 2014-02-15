@@ -1,44 +1,47 @@
-<div class="small-6 columns">
-  <h1>Spells Known (<%= @spells.count %>)</h1>
+<%- if @user == current_user -%>
+  <div class="small-6 columns">
 
-  <dl class="tabs vertical" data-tab>
-    <% @spells_by_level.each do |level, spells| %>
-      <dd class=
-        <% if level == @spells_by_level.keys.first %>
-          "active"
-        <% else %>
-          nil
-        <% end %>
-        ><%= link_to "Level #{level}", "#level-#{level}" %>
-      </dd>
-    <% end %>
-  </dl>
-  <div class="tabs-content vertical">
-    <% @spells_by_level.each do |level, spells| %>
-      <div class=
-        <% if level == @spells_by_level.keys.first %>
-          "content active"
-        <% else %>
-          "content"
-        <% end %>
-        id="level-<%= level %>">
-        <ol>
-          <% spells.each do |spell| %>
-            <li>
-              <%= link_to spell.name, spell.url %> <%= link_to(spell_path(spell)) do %><i class="fi-pencil"></i><% end %>
-            </li>
+    <h1>Spells Known (<%= @spells.count %>)</h1>
+
+    <dl class="tabs vertical" data-tab>
+      <% @spells_by_level.each do |level, spells| %>
+        <dd class=
+          <% if level == @spells_by_level.keys.first %>
+            "active"
+          <% else %>
+            nil
           <% end %>
-        </ol>
-      </div>
+          ><%= link_to "Level #{level}", "#level-#{level}" %>
+        </dd>
+      <% end %>
+    </dl>
+    <div class="tabs-content vertical">
+      <% @spells_by_level.each do |level, spells| %>
+        <div class=
+          <% if level == @spells_by_level.keys.first %>
+            "content active"
+          <% else %>
+            "content"
+          <% end %>
+          id="level-<%= level %>">
+          <ol>
+            <% spells.each do |spell| %>
+              <li>
+                <%= link_to spell.name, spell.url %> <%= link_to(user_spell_path(@user, spell)) do %><i class="fi-pencil"></i><% end %>
+              </li>
+            <% end %>
+          </ol>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="small-6 columns">
+    <h2>Learn New Spell</h2>
+    <%= simple_form_for [@user, @spell] do |f| %>
+      <%= f.input :name %>
+      <%= f.input :url %>
+      <%= f.input :level %>
+      <%= f.button :submit, 'Learn' %>
     <% end %>
   </div>
-</div>
-<div class="small-6 columns">
-  <h2>Learn New Spell</h2>
-  <%= simple_form_for(@spell) do |f| %>
-    <%= f.input :name %>
-    <%= f.input :url %>
-    <%= f.input :level %>
-    <%= f.button :submit, 'Learn' %>
-  <% end %>
-</div>
+<%- end -%>

@@ -2,9 +2,10 @@ class SpellsController < ApplicationController
 
   def create
     @spell = Spell.new(spell_params)
+    @spell.user = User.find(params[:user_id])
     if @spell.save
       flash[:success] = "Spell added successfully."
-      redirect_to spells_path
+      redirect_to user_spells_path(User.find(params[:user_id]))
     else
       flash.now[:error] = "Whups, something went wrong."
       render :index
@@ -12,7 +13,8 @@ class SpellsController < ApplicationController
   end
 
   def index
-    @spells = Spell.all.order(:level, :name)
+    @user = User.find(params[:user_id])
+    @spells = @user.spells.order(:level, :name)
     @spells_by_level = Hash.new
     @spells.each do |spell|
       if @spells_by_level.has_key?(spell.level)
@@ -22,6 +24,7 @@ class SpellsController < ApplicationController
       end
     end
     @spell = Spell.new
+
   end
 
   def show
@@ -32,7 +35,7 @@ class SpellsController < ApplicationController
     @spell = Spell.find(params[:id])
     if @spell.update(spell_params)
       flash[:success] = "Spell successfully edited."
-      redirect_to spells_path
+      redirect_to user_spells_path(User.find(params[:user_id]))
     else
       flash.now[:error] = "Whups, something went wrong."
       render :show

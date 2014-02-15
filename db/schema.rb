@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140214220756) do
     t.string   "name",       null: false
     t.string   "url",        null: false
     t.integer  "level",      null: false
+    t.integer  "user_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

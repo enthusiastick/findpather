@@ -1,9 +1,11 @@
-<div class="small-8 small-centered columns">
-  <h1>Edit Spell</h1>
-  <%= simple_form_for(@spell) do |f| %>
-    <%= f.input :name %>
-    <%= f.input :url %>
-    <%= f.input :level %>
-    <%= f.button :submit, 'Edit' %>
-  <% end %>
-</div>
+<%- if @spell.user == current_user -%>
+  <div class="small-8 small-centered columns">
+    <h1>Edit Spell</h1>
+    <%= simple_form_for [@spell.user, @spell] do |f| %>
+      <%= f.input :name %>
+      <%= f.input :url %>
+      <%= f.input :level %>
+      <%= f.button :submit, 'Edit' %>
+    <% end %>
+  </div>
+<%- end -%>
