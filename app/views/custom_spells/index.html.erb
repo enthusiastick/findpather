@@ -1,0 +1,37 @@
+  <%- if user_signed_in? %>
+    <div class="small-12 columns">
+      <h1>Custom Spell List</h1>
+      <dl class="accordion" data-accordion>
+        <% @user.custom_spells.order(:level).order(:name).each do |spell| %>
+          <dd class="accordion-navigation">
+            <%= link_to "#{spell.level} #{spell.name}", "##{spell.name.parameterize}" %>
+            <div id='<%= spell.name.parameterize %>' class='content'>
+              <%= link_to(user_custom_spell_path(@user, spell)) do %><i class="fi-pencil"></i><% end %>
+              <ul class="inline-list">
+                <li>School: <%= spell.school %>;</li>
+                <li>Casting Time:</strong> <%= spell.casting_time %>;</li>
+                <li>Components:</strong> <%= spell.components %>;</li>
+                <% unless spell.area.empty? %>
+                  <li>Area:</strong> <%= spell.area %>;</li>
+                <% end %>
+                <% unless spell.range.empty? %>
+                  <li>Range:</strong> <%= spell.range %>;</li>
+                <% end %>
+                <li>Target:</strong> <%= spell.target %>;</li>
+                <li>Duration:</strong> <%= spell.duration %>;</li>
+                <% unless spell.saving_throw.empty? %>
+                  <li>Saving Throw: <%= spell.saving_throw %>;</li>
+                <% end %>
+                <% unless spell.spell_resistance.empty? %>
+                  <li>Spell Resistance: <%= spell.spell_resistance %>;</li>
+                <% end %>
+              </ul>
+              <%= simple_format(spell.description) %>
+            </div>
+          </dd>
+        <% end%>
+      </dl>
+      <p><%= button_to 'Add New Custom Spell', new_user_custom_spell_path(@user), class: "button", method: :get %></p>
+    </div>
+  <%- end -%>
+</div>
