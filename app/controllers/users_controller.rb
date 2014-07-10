@@ -10,10 +10,10 @@ class UsersController < ApplicationController
     if @user.save
       session[:current_user_id] = @user.id
       flash[:success] = "Welcome to Findpather."
-      redirect_to user_spells_path(@user)
+      redirect_to user_spells_path(@user) + '?#'
     else
       flash[:failure] = "Unable to authenticate."
-      redirect_to root
+      redirect_to root_path
     end
   end
 

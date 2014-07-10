@@ -5,7 +5,7 @@ class SpellsController < ApplicationController
     @spell.user = User.find(params[:user_id])
     if @spell.save
       flash[:success] = "Spell added successfully."
-      redirect_to user_spells_path(User.find(params[:user_id]))
+      redirect_to user_spells_path(User.find(params[:user_id])) + '?#'
     else
       flash.now[:error] = "Whups, something went wrong."
       render :index
@@ -35,7 +35,7 @@ class SpellsController < ApplicationController
     @spell = Spell.find(params[:id])
     if @spell.update(spell_params)
       flash[:success] = "Spell successfully edited."
-      redirect_to user_spells_path(User.find(params[:user_id]))
+      redirect_to user_spells_path(User.find(params[:user_id])) + '?#'
     else
       flash.now[:error] = "Whups, something went wrong."
       render :show
