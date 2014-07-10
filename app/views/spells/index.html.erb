@@ -37,11 +37,14 @@
   </div>
   <div class="small-6 columns">
     <h2>Learn New Spell</h2>
-    <%= simple_form_for [@user, @spell] do |f| %>
-      <%= f.input :name %>
-      <%= f.input :url %>
-      <%= f.input :level %>
-      <%= f.button :submit, 'Learn' %>
-    <% end %>
+    <%= button_to 'Learn', '#', class: "button", id: "ltoggle",method: :get, style: "display: inline;" %>
+    <div class="hide" id="lform">
+      <%= simple_form_for [@user, @spell] do |f| %>
+        <%= f.input :name %>
+        <%= f.input :url %>
+        <%= f.input :level %>
+        <%= f.button :submit, 'Learn' %>
+      <% end %>
+    </div>
   </div>
 <%- end -%>
